@@ -1,3 +1,17 @@
 <ng-container *ngIf="config$ | async; let config">
     <input type="time" step="1" value="11:22:33" />
+    <h1>config.description</h1>
+    <ng-container *ngFor="let section of config.sections">
+        <div class="section-separator"></div>
+        <label for="category">section.name</label>
+        <ng-container *ngFor="let category of section.categories" id="category">
+            <label for="values">category.name</label>
+            <div id="values">
+                <ng-container *ngFor="let value of category.values">
+                    <label for="value">value.name</label>
+                    <input matInput type="text" [ngModel]="value.value"></input>
+                </ng-container>
+            </div>
+        </ng-container>
+    </ng-container>
 </ng-container>
