@@ -1,12 +1,16 @@
-.without_ampm::-webkit-datetime-edit-ampm-field {
-    display: none;
+.section-separator {
+    width: 30vw;
+    height: 1px;
+    background-color: black;
 }
 
-input[type=time]::-webkit-clear-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -o-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-    margin: -10px;
+.section-name {
+    font-size: large;
+    font-weight: bold;
+}
+
+.category-name {
+    font-size: medium;
+    font-weight: 500;
+    font-style: italic;
 }

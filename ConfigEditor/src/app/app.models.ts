@@ -12,7 +12,9 @@ export type Section = {
 
 export type ConfigValue = {
     name: string;
-    value: number | string | Time;
+    value: number | string;
+    valueType: 'text' | 'number' | 'time';
+    availableValues: string[] | undefined;
 };
 
 export type Category = {
