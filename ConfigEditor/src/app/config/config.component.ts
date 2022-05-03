@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { Configuration } from '../app.models';
 
 @Component({
@@ -8,7 +8,7 @@ import { Configuration } from '../app.models';
   styleUrls: ['./config.component.css']
 })
 export class ConfigComponent {
-    public config$: BehaviorSubject<Configuration> = new BehaviorSubject({} as Configuration)
+    config$: ReplaySubject<Configuration> = new ReplaySubject();
     @Input()
     public set config(value: Configuration) {
         this.config$.next(value);

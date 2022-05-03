@@ -1,5 +1,4 @@
-const CATEGORY_START_DELIMITER = '- ';
-const SECTION_NAME_DELIMITERS = { start: '=== Section: ', end: ' ===' };
+import { CATEGORY_START_DELIMITER, SECTION_NAME_DELIMITERS } from "./app.constants";
 
 export const groupByCategory = (value: string) =>
     // splice ignores the section description (1st line)

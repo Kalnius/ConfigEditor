@@ -1,3 +1,4 @@
+import { AVAILABLE_VALUES } from "./app.constants";
 import { Category, Configuration } from "./app.models";
 import { extractValueFromString, getSectionName, groupByCategory, groupBySection, removeAllOccurences, splitStringToRows } from "./string-utils";
 
@@ -10,10 +11,14 @@ export const mapCategories = (categories: string[]): Category[] =>
         }
 
         if (row.length !== 0) { // ignore empty rows
+            // removing tabs and that single colon from the value
+            const name = row.substring(0, row.indexOf(':'));
+            const value = extractValueFromString(row);
             category.values.push({
-                name: row.substring(0, row.indexOf(':')),
-                // removing tabs and that single colon from the value
-                value: extractValueFromString(row)
+                name,
+                value,
+                availableValues: name in AVAILABLE_VALUES ? AVAILABLE_VALUES[name as keyof typeof AVAILABLE_VALUES] : undefined,
+                valueType: !isNaN(Number(value)) ? 'number' : typeof value === 'string' && value.split(':').length === 3 ? 'time' : 'text'
             });
         }
 
@@ -21,7 +26,7 @@ export const mapCategories = (categories: string[]): Category[] =>
     }, { name: '', values: [] } as Category));
 
 
-export const deserializeConfigurationString = (base: string) =>
+export const deserializeConfigurationString = (base: string): Configuration =>
     groupBySection(base).reduce((config, value, index) => {
         // 1st line is the config description
         if (index === 0) {
